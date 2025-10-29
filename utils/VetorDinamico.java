@@ -19,8 +19,6 @@ public class VetorDinamico {
             vetor[tamanhoAtual] = elemento;
             tamanhoAtual++;
         }
-        
-       
     }
    
    
@@ -38,7 +36,8 @@ public class VetorDinamico {
             if(tamanho > Integer.MAX_VALUE){
                 throw new OutOfMemoryError("Tamanho do vetor excede o limite maximo");
             }
-            int tamanhoInt =(int) tamanho;
+
+            int tamanhoInt = (int) tamanho;
             String[] novoVetor = new String[tamanhoInt];
             for(int i = 0; i < vetor.length; i++){
                 novoVetor[i] = vetor[i];

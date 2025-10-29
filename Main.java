@@ -1,8 +1,9 @@
 import java.io.File;
 import java.io.FileReader;
 
-import flex.*;
-import simbolos.TabelaDeSimbolos;
+
+import src.flex.*;
+import src.simbolos.TabelaDeSimbolos;
 import utils.VetorDinamico;
 
 public class Main {
