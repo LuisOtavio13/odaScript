@@ -24,7 +24,18 @@ import simbolos.TabelaDeSimbolos;
 %}
 
 %%
-
+var {
+    addSb("VAR", yytext());
+    addToken("VAR");
+}
+end {
+    addSb("END", yytext());
+    addToken("END");
+}
+= {
+    addSb("IGUAL", yytext());
+    addToken("IGUAL");
+}
 [a-zA-Z]+    { 
     addSb("IDENTIFIER", yytext());
     addToken("IDENTIFIER");
@@ -35,8 +46,9 @@ import simbolos.TabelaDeSimbolos;
     addToken("NUMBER");
 }
 
-[ \t\n\r]+   { /* ignora */ }
+[ \t\n\r]+   {  }
 
 <<EOF>>      { 
-    return null; // ou não retorne nada
+    addToken("EOF");
+    return null; 
 }
