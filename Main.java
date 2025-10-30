@@ -1,8 +1,8 @@
 import java.io.File;
 import java.io.FileReader;
 
+import src.analizeSemantica.OKAY;
 
-import src.flex.*;
 import src.simbolos.TabelaDeSimbolos;
 import utils.VetorDinamico;
 
@@ -19,6 +19,8 @@ public class Main {
             for (int i = 0; i < b.tamanhoVetor(); i++) {
                 System.out.println(b.getElemento(i));
             }
+            System.out.println("AQUI É O ANALIZADOR SINTATICO");
+            OKAY.main(tb, b);
         }catch(Exception e){
             System.out.println(e);
         }
