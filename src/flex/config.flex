@@ -24,6 +24,39 @@ import simbolos.TabelaDeSimbolos;
 %}
 
 %%
+
+"<" {
+    addSb("MENOR_QUE", yytext());
+    addToken("MENOR_QUE");
+}
+">" {
+    addSb("MAIOR_QUE", yytext());
+    addToken("MAIOR_QUE");
+}
+
+if {
+    addSb("IF", yytext());
+    addToken("IF");
+}
+">=" {
+    addSb("MAIOR_OU_IGUAL_QUE", yytext());
+    addToken("MAIOR_OU_IGUAL_QUE");
+}
+
+"<=" {
+    addSb("MENOR_OU_IGUAL_QUE", yytext());
+    addToken("MENOR_OU_IGUAL_QUE");
+}
+
+"==" {
+    addSb("IGUAL_QUE", yytext());
+    addToken("IGUAL_QUE");
+}
+
+
+
+
+
 var {
     addSb("VAR", yytext());
     addToken("VAR");

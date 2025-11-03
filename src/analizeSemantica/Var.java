@@ -1,6 +1,6 @@
 package src.analizeSemantica;
 
-import src.simbolos.TabelaDeSimbolos;
+
 import utils.VetorDinamico;
 
 public class Var {
@@ -9,30 +9,37 @@ public class Var {
      * <VAR> -> "VAR" = INTERGER = "END" | "=" <EXPRESAO>
      * <EXPRESAO> -> String "END" | numero "END" | variavel "END"
      * 
-     * @param tb
-     * @param i
-     * @param vt
+     *
      * @return index
      */
     public static int start(Config args) {
         VetorDinamico vt = args.vt;
         int index = args.index;
+        boolean ehIf = false;
 
         index++;
         verificarNome(vt, index);
-        index++;
+        index+=2;
+        if (vt.getElemento(index).equals("IF")) {
+            If.start(new Config(args.tb, index, vt));
+            ehIf = true;
+        }
         verificarAtribuisaoOuOFinalDaVarivel(vt, index);
+
         if (vt.getElemento(index).equals("END")) {
             return index;
         }
 
-        verificarExpresao(vt, index);
-        index+=2;
-        if(!vt.getElemento(index).equals("END")|| vt.equals("EOF")){
-            System.out.println("[ERROR] falta o end ai amigo");
-            System.exit(1);
-        }
 
+
+        if(!ehIf){
+            verificarExpresao(vt, index);
+            index+=2;
+            if(!vt.getElemento(index).equals("END")|| vt.equals("EOF")){
+                System.out.println("[ERROR] falta o end ai amigo ");
+                System.exit(1);
+            }
+        }
         return index;
     }
 
