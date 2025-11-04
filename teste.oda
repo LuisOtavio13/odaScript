@@ -1,1 +1,1 @@
-var a = if 5 > 4 end
+var a = if 5 > 4  5 else 3 end

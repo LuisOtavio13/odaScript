@@ -38,6 +38,10 @@ if {
     addSb("IF", yytext());
     addToken("IF");
 }
+else {
+    addSb("ELSE", yytext());
+    addToken("ELSE");
+}
 ">=" {
     addSb("MAIOR_OU_IGUAL_QUE", yytext());
     addToken("MAIOR_OU_IGUAL_QUE");

@@ -7,10 +7,10 @@ public class If {
 
     /*
     TODO: add sistema de else
-
+        number simbolo number
      */
-    public  static int start(Config a){
-        System.out.println("hello word");
+    public static int start(Config a){
+        
         int index = a.index;
         VetorDinamico  vt= a.vt;
 
@@ -19,9 +19,11 @@ public class If {
             System.out.println("[ERROR] voce precisa de um numero ou um valor boleano");
             System.exit(1);
         }
-        index++;
+        
         index = verificarExpresao(vt,index);
-
+        index = verificarOqueRetorna(index, vt);
+        index++;
+        
 
         return index;
     }
@@ -32,21 +34,32 @@ public class If {
         }
     }
     public static int verificarExpresao(VetorDinamico vt, int index){
-        final String[] expresao = {"MENOR_QUE", "IGUAL_QUE", "MAIOR_QUE", "MENOR_OU_IGUAL_QUE", "MAIOR_OU_IGUAL_QUE"};
-        boolean foi = false;
+        
         index++;
+        
 
-        for (String s : expresao) {
-            if (vt.getElemento(index).equals(s)) {
-                foi = true;
-                break;
-            }
-        }
-        if(!foi){
+       
+        if(! vt.getElemento(index).equals("MAIOR_QUE")){
             System.out.println("[ERROR] voce precisa informar um simbolo de comparacao ou um bolleano");
+            System.out.println("É aqui msm");
             System.exit(1);
         }
+        index++;
         verifiacarSeEhAlgoValido(index, vt);
+        index++;
         return  index;
+    }
+    public static int verificarOqueRetorna(int index, VetorDinamico vt){
+        index++;
+        
+        verifiacarSeEhAlgoValido(index, vt);
+
+        if(!vt.getElemento(index).equals("ELSE")){
+            System.out.println("[ERROR] deve colocar o else ai fi");
+            System.exit(1);
+        }
+        index++;
+        verifiacarSeEhAlgoValido(index, vt);
+        return index;
     }
 }
