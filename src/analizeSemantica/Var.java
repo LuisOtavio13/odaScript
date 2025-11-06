@@ -21,12 +21,13 @@ public class Var {
         verificarNome(vt, index);
         index+=2;
         if (vt.getElemento(index).equals("IF")) {
-            If.start(new Config(args.tb, index, vt));
+            index = If.start(new Config(args.tb, index, vt));
             ehIf = true;
         }
         verificarAtribuisaoOuOFinalDaVarivel(vt, index);
-
+        
         if (vt.getElemento(index).equals("END")) {
+            index++;
             return index;
         }
 
@@ -39,7 +40,10 @@ public class Var {
                 System.out.println("[ERROR] falta o end ai amigo ");
                 System.exit(1);
             }
+           
         }
+        
+        
         return index;
     }
 
