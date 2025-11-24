@@ -285,21 +285,27 @@ class Yylex {
   private boolean zzEOFDone;
 
   /* user code: */
-    private VetorDinamico vetor = new VetorDinamico();
-    private TabelaDeSimbolos tb = new TabelaDeSimbolos();
+    private VetorDinamico vetorTokens = new VetorDinamico();
+    private TabelaDeSimbolos tabelaDeSimbolos = new TabelaDeSimbolos();
     
+   
     public VetorDinamico getVetor() {
-        return vetor;
-    }
-    private void addSb(String tipo, String okay){
-        tb.add(tipo, okay);
+        return vetorTokens;
     }
     
-    private void addToken(String tipo) {
-        vetor.adicionar(tipo);
+    
+    public TabelaDeSimbolos obterTabelaDeSimbolos() {
+        return tabelaDeSimbolos;
     }
-    public TabelaDeSimbolos aaa(){
-        return tb;
+    
+    
+    private void adicionarSimboloTabela(String tipoSimbolo, String lexema) {
+        tabelaDeSimbolos.adicionarSimbolo(tipoSimbolo, lexema);
+    }
+    
+   
+    private void adicionarToken(String tipoToken) {
+        vetorTokens.adicionar(tipoToken);
     }
 
 
@@ -653,7 +659,7 @@ class Yylex {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
               {
-                addToken("EOF");
+                adicionarToken("EOF");
     return null;
               }
       }
@@ -665,74 +671,74 @@ class Yylex {
           // fall through
           case 14: break;
           case 2:
-            { addSb("NUMBER", yytext());
-    addToken("NUMBER");
+            { adicionarSimboloTabela("NUMBER", yytext());
+    adicionarToken("NUMBER");
             }
           // fall through
           case 15: break;
           case 3:
-            { addSb("MENOR_QUE", yytext());
-    addToken("MENOR_QUE");
+            { adicionarSimboloTabela("MENOR_QUE", yytext());
+    adicionarToken("MENOR_QUE");
             }
           // fall through
           case 16: break;
           case 4:
-            { addSb("IGUAL", yytext());
-    addToken("IGUAL");
+            { adicionarSimboloTabela("IGUAL", yytext());
+    adicionarToken("IGUAL");
             }
           // fall through
           case 17: break;
           case 5:
-            { addSb("MAIOR_QUE", yytext());
-    addToken("MAIOR_QUE");
+            { adicionarSimboloTabela("MAIOR_QUE", yytext());
+    adicionarToken("MAIOR_QUE");
             }
           // fall through
           case 18: break;
           case 6:
-            { addSb("IDENTIFIER", yytext());
-    addToken("IDENTIFIER");
+            { adicionarSimboloTabela("IDENTIFIER", yytext());
+    adicionarToken("IDENTIFIER");
             }
           // fall through
           case 19: break;
           case 7:
-            { addSb("MENOR_OU_IGUAL_QUE", yytext());
-    addToken("MENOR_OU_IGUAL_QUE");
+            { adicionarSimboloTabela("MENOR_OU_IGUAL_QUE", yytext());
+    adicionarToken("MENOR_OU_IGUAL_QUE");
             }
           // fall through
           case 20: break;
           case 8:
-            { addSb("IGUAL_QUE", yytext());
-    addToken("IGUAL_QUE");
+            { adicionarSimboloTabela("IGUAL_QUE", yytext());
+    adicionarToken("IGUAL_QUE");
             }
           // fall through
           case 21: break;
           case 9:
-            { addSb("MAIOR_OU_IGUAL_QUE", yytext());
-    addToken("MAIOR_OU_IGUAL_QUE");
+            { adicionarSimboloTabela("MAIOR_OU_IGUAL_QUE", yytext());
+    adicionarToken("MAIOR_OU_IGUAL_QUE");
             }
           // fall through
           case 22: break;
           case 10:
-            { addSb("IF", yytext());
-    addToken("IF");
+            { adicionarSimboloTabela("IF", yytext());
+    adicionarToken("IF");
             }
           // fall through
           case 23: break;
           case 11:
-            { addSb("END", yytext());
-    addToken("END");
+            { adicionarSimboloTabela("END", yytext());
+    adicionarToken("END");
             }
           // fall through
           case 24: break;
           case 12:
-            { addSb("VAR", yytext());
-    addToken("VAR");
+            { adicionarSimboloTabela("VAR", yytext());
+    adicionarToken("VAR");
             }
           // fall through
           case 25: break;
           case 13:
-            { addSb("ELSE", yytext());
-    addToken("ELSE");
+            { adicionarSimboloTabela("ELSE", yytext());
+    adicionarToken("ELSE");
             }
           // fall through
           case 26: break;

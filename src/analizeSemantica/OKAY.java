@@ -1,25 +1,60 @@
 package src.analizeSemantica;
 
-import src.a.Eu;
 import src.simbolos.TabelaDeSimbolos;
 import utils.VetorDinamico;
 
 public class OKAY {
-    public static void main(TabelaDeSimbolos tb,VetorDinamico vt ){
-        for (int i = 0; i < vt.tamanhoVetor(); i++) {
-            if(Eu.DEBUG_ALL || Eu.DEBUG_ANALIZE_SEMANTICA){
-                System.out.println("[DEBUG] estamos no i = "+i);
-            }
-            switch (vt.getElemento(i)) {
-                case Luis.VAR:
-                     i = Var.start(new Config(tb, i, vt));
-                    break;
-                case "EOF":
-                    break;
-                default:
-                   System.out.println("Não conheço ...");
-            }
-            
+
+    public static void main(TabelaDeSimbolos tabelaDeSimbolos, VetorDinamico vetorTokens) {
+
+        for (int indiceAtual = 0; indiceAtual < vetorTokens.obterTamanho(); indiceAtual++) {
+            String tokenAtual = vetorTokens.obterElemento(indiceAtual);
+
+            GerenciadorErros.debugPosicao("processando token", indiceAtual);
+
+            indiceAtual = processarTokenPorTipo(
+                    tokenAtual,
+                    tabelaDeSimbolos,
+                    vetorTokens,
+                    indiceAtual);
+        }
+    }
+
+    private static int processarTokenPorTipo(
+        
+            String tipoToken,
+            TabelaDeSimbolos tabelaDeSimbolos,
+            VetorDinamico vetorTokens,
+            int indiceAtual
+        ){
+
+        switch (tipoToken) {
+            case ConstantesTokens.VAR:
+
+                indiceAtual = processarDeclaracaoVariavel(
+                        new ContextoAnalise(tabelaDeSimbolos, indiceAtual, vetorTokens));
+                break;
+
+            case ConstantesTokens.EOF:
+
+                GerenciadorErros.debug("fim do arquivo alcancado");
+                break;
+
+            default:
+
+                GerenciadorErros.tokenDesconhecido(tipoToken, indiceAtual);
+                break;
+        }
+
+        return indiceAtual;
+    }
+
+    private static int processarDeclaracaoVariavel(ContextoAnalise contextoAnalise) {
+        try {
+            return Var.iniciarProcessamento(contextoAnalise);
+        } catch (Exception excecao) {
+            GerenciadorErros.excecaoGenerica(excecao);
+            return contextoAnalise.obterIndiceAtual();
         }
     }
 }

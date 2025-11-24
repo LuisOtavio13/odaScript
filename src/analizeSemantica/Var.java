@@ -1,76 +1,65 @@
 package src.analizeSemantica;
 
-
 import utils.VetorDinamico;
 
 public class Var {
-    /**
-     * TODO: add a gramatica do var seguido essa gramatica
-     * <VAR> -> "VAR" = INTERGER = "END" | "=" <EXPRESAO>
-     * <EXPRESAO> -> String "END" | numero "END" | variavel "END"
-     * 
-     *
-     * @return index
-     */
-    public static int start(Config args) {
-        VetorDinamico vt = args.vt;
-        int index = args.index;
-        boolean ehIf = false;
 
-        index++;
-        verificarNome(vt, index);
-        index+=2;
-        if (vt.getElemento(index).equals("IF")) {
-            index = If.start(new Config(args.tb, index, vt));
-            ehIf = true;
-        }
-        verificarAtribuisaoOuOFinalDaVarivel(vt, index);
-        
-        if (vt.getElemento(index).equals("END")) {
-            index++;
-            return index;
-        }
-
-
-
-        if(!ehIf){
-            verificarExpresao(vt, index);
-            index+=2;
-            if(!vt.getElemento(index).equals("END")|| vt.equals("EOF")){
-                System.out.println("[ERROR] falta o end ai amigo ");
-                System.exit(1);
-            }
-           
+    public static int iniciarProcessamento(ContextoAnalise contextoAnalise) {
+        if (contextoAnalise == null) {
+            throw new IllegalArgumentException("Contexto não pode ser null");
         }
         
+        VetorDinamico vetorTokens = contextoAnalise.obterVetorTokens();
+        int indiceAtual = contextoAnalise.obterIndiceAtual();
+
+        indiceAtual++;
+        validarNomeVariavel(vetorTokens, indiceAtual);
+        indiceAtual++;
         
-        return index;
+        validarOperadorIgual(vetorTokens, indiceAtual);
+        indiceAtual++;
+        
+        String tokenAtual = vetorTokens.obterElemento(indiceAtual);
+        if (tokenAtual.equals(ConstantesTokens.IF)) {
+            indiceAtual = If.iniciarProcessamento(
+                new ContextoAnalise(
+                    contextoAnalise.obterTabelaDeSimbolos(),
+                    indiceAtual,
+                    vetorTokens
+                )
+            );
+        } else if (!ValidadorToken.ehOperandoValido(tokenAtual)) {
+            GerenciadorErros.valorInvalido(indiceAtual);
+            throw new IllegalStateException("Valor inválido");
+        } else {
+            indiceAtual++;
+        }
+        
+        if (!vetorTokens.obterElemento(indiceAtual).equals(ConstantesTokens.END)) {
+            GerenciadorErros.endFaltando("VAR");
+            throw new IllegalStateException("END esperado");
+        }
+        indiceAtual++;
+        
+        return indiceAtual;
     }
 
-    public static void verificarNome(VetorDinamico vt, int index) {
-        if (!vt.getElemento(index).equals("IDENTIFIER") || vt.getElemento(index).equals("EOF")) {
-            System.out.println("ERROR tem que colocar um nome na variavel ");
-            System.exit(1);
-        }
-    }
-
-    public static void verificarAtribuisaoOuOFinalDaVarivel(VetorDinamico vt, int index) {
-        if (!vt.getElemento(index).equals("END") && !vt.getElemento(index).equals("IGUAL")
-                || vt.getElemento(index).equals("EOF")) {
-            System.out.println("Error voce precisa ou atribuir o valor a variavel ou colocar um end nela ");
-            System.exit(1);
+    private static void validarNomeVariavel(VetorDinamico vetorTokens, int indice) {
+        String tokenAtual = vetorTokens.obterElemento(indice);
+        
+        if (!tokenAtual.equals(ConstantesTokens.IDENTIFIER) || 
+            tokenAtual.equals(ConstantesTokens.EOF)) {
+            GerenciadorErros.identificadorEsperado(indice);
+            throw new IllegalStateException("Identificador esperado");
         }
     }
 
-    public static void verificarExpresao(VetorDinamico vt, int index) {
-        if (vt.getElemento(index).equals("IGUAL")) {
-            index++;
-            if (!vt.getElemento(index).equals("IF") && !vt.getElemento(index).equals("STRING")
-                    && !vt.getElemento(index).equals("NUMBER") && !vt.getElemento(index).equals("IDENTIFIER")
-                    || vt.getElemento(index).equals("EOF")) {
-                System.out.println("[ERROR] voce precisa atribuir um valor a variavel");
-                System.exit(1);
-            }
+    private static void validarOperadorIgual(VetorDinamico vetorTokens, int indice) {
+        String tokenAtual = vetorTokens.obterElemento(indice);
+        
+        if (!tokenAtual.equals(ConstantesTokens.IGUAL)) {
+            GerenciadorErros.tokenInesperado(tokenAtual, "=", indice);
+            throw new IllegalStateException("= esperado");
         }
     }
 }
