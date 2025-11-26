@@ -2,7 +2,8 @@
 import java.io.FileReader;
 import java.io.IOException;
 
-import src.analizeSemantica.OKAY;
+import src.analizadorSemantico.MainAnalizadorSemantico;
+import src.analizeSintatico.OKAY;
 import src.simbolos.TabelaDeSimbolos;
 import utils.VetorDinamico;
 
@@ -25,6 +26,7 @@ public class Main {
             exibirResultadosAnaliseLexica(symbolTable, tokenVector);
 
             OKAY.main(symbolTable, tokenVector);
+            MainAnalizadorSemantico.main(symbolTable, tokenVector);
 
         } catch (IOException ioException) {
             exibirErroArquivo(ioException);
