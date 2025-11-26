@@ -1,7 +1,7 @@
 package src.analizadorSemantico;
 
 import src.analizeSintatico.ConstantesTokens;
-import src.analizeSintatico.GerenciadorErros;
+
 import src.simbolos.TabelaDeSimbolos;
 import utils.VetorDinamico;
 
