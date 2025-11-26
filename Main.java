@@ -5,6 +5,10 @@ import java.io.IOException;
 import src.analizadorSemantico.MainAnalizadorSemantico;
 import src.analizeSintatico.OKAY;
 import src.simbolos.TabelaDeSimbolos;
+import src.patter.LLVMGenerator;
+import src.ast.AstPattter;
+import src.ast.Var;
+import utils.VetorDInamicoDeAST;
 import utils.VetorDinamico;
 
 
@@ -14,8 +18,10 @@ public class Main {
     private static final String SEPARADOR_LINHA = "-".repeat(50);
     private static final String TITULO_TABELA_SIMBOLOS = "TABELA DE SÍMBOLOS LÉXICOS";
     private static final String TITULO_TOKENS = "TOKENS IDENTIFICADOS";
+    private static final String TITULO_LLVM_IR = "LLVM IR GERADO (via JavaCPP)";
 
     public static void main(String[] args) {
+        VetorDInamicoDeAST vetorDInamicoDeAST = new VetorDInamicoDeAST();
         try {
             validarArquivoEntrada(ARQUIVO_ENTRADA);
 
@@ -26,7 +32,9 @@ public class Main {
             exibirResultadosAnaliseLexica(symbolTable, tokenVector);
 
             OKAY.main(symbolTable, tokenVector);
-            MainAnalizadorSemantico.main(symbolTable, tokenVector);
+            vetorDInamicoDeAST = MainAnalizadorSemantico.main(symbolTable, tokenVector);
+
+            exibirLLVMIR(vetorDInamicoDeAST);
 
         } catch (IOException ioException) {
             exibirErroArquivo(ioException);
@@ -80,6 +88,27 @@ public class Main {
         }
     }
 
+    private static void exibirLLVMIR(VetorDInamicoDeAST ast) {
+        System.out.println("\n" + SEPARADOR_LINHA);
+        System.out.println(TITULO_LLVM_IR);
+        System.out.println(SEPARADOR_LINHA);
+
+        LLVMGenerator gerador = new LLVMGenerator();
+        gerador.criarMain();
+
+        for (int i = 0; i < ast.obterTamanho(); i++) {
+            AstPattter elemento = ast.obterElemento(i);
+            if (elemento instanceof Var) {
+                gerador.declararVariavel((Var) elemento);
+            }
+        }
+
+        gerador.retornarZero();
+        gerador.gerarIR();
+        gerador.compilarParaObjeto("program");
+        gerador.limpar();
+    }
+
     private static void exibirErroArquivo(IOException ioException) {
         System.err.println("\n[ERRO DE ARQUIVO] " + ioException.getMessage());
         ioException.printStackTrace(System.err);
@@ -92,3 +121,5 @@ public class Main {
         exception.printStackTrace(System.err);
     }
 }
+
+

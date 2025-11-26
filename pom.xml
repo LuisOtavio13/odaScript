@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.exemplo</groupId>
+    <artifactId>llvm-java</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <exec.mainClass>Main</exec.mainClass>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <bytedeco.version>1.5.10</bytedeco.version>
+        <llvm.version>17.0.6</llvm.version>
+    </properties>
+
+   
+
+    <dependencies>
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacpp</artifactId>
+            <version>${bytedeco.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>llvm-platform</artifactId>
+            <version>${llvm.version}-${bytedeco.version}</version>
+        </dependency>
+        
+    </dependencies>
+    <build>
+        <sourceDirectory>.</sourceDirectory>
+    </build>
+</project>

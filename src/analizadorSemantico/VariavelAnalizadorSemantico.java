@@ -1,5 +1,8 @@
 package src.analizadorSemantico;
 
+import src.ast.AstPattter;
+import src.ast.Var;
+
 import utils.VetorDinamico;
 
 public class VariavelAnalizadorSemantico {
@@ -8,7 +11,7 @@ public class VariavelAnalizadorSemantico {
     private static final String VARIAVEL_NAO_DECLARADA = "Variável %s não declarada";
     private static final int NAO_ENCONTRADO = -1;
 
-    public static VetorDinamico declararVariavel(VetorDinamico vetorDinamico, String nomeVariavel) {
+    public static  Retorno declararVariavel(VetorDinamico vetorDinamico, String nomeVariavel) {
         if (nomeVariavel == null || nomeVariavel.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome de variável não pode ser vazio");
         }
@@ -18,9 +21,12 @@ public class VariavelAnalizadorSemantico {
                 String.format(VARIAVEL_JA_DECLARADA, nomeVariavel)
             );
         }
-
         vetorDinamico.adicionar(nomeVariavel);
-        return vetorDinamico;
+        AstPattter astVar = new Var(nomeVariavel);
+        Retorno vetor = new Retorno();
+        vetor.setListaRetornoAST(astVar);
+        vetor.setListaRetorno(vetorDinamico);
+        return vetor;
     }
 
     public static void verificarDeclaracao(VetorDinamico vetorDinamico, String nomeVariavel) {
