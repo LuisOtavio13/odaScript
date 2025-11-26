@@ -1,5 +1,5 @@
 import utils.VetorDinamico;
-import simbolos.TabelaDeSimbolos;
+import src.simbolos.TabelaDeSimbolos;
 
 %%
 %type Void 
@@ -12,13 +12,13 @@ import simbolos.TabelaDeSimbolos;
         return vetor;
     }
     private void addSb(String tipo, String okay){
-        tb.add(tipo, okay);
+        tb.adicionarSimbolo(tipo, okay);
     }
     
     private void addToken(String tipo) {
         vetor.adicionar(tipo);
     }
-    public TabelaDeSimbolos aaa(){
+    public TabelaDeSimbolos obterTabelaDeSimbolos(){
         return tb;
     }
 %}
@@ -41,6 +41,10 @@ if {
 else {
     addSb("ELSE", yytext());
     addToken("ELSE");
+}
+print {
+    addSb("PRINT", yytext());
+    addToken("PRINT");
 }
 ">=" {
     addSb("MAIOR_OU_IGUAL_QUE", yytext());
@@ -76,6 +80,12 @@ end {
 [a-zA-Z]+    { 
     addSb("IDENTIFIER", yytext());
     addToken("IDENTIFIER");
+}
+
+\"[^\"]*\"   {
+    String conteudo = yytext().substring(1, yytext().length() - 1);
+    addSb("STRING", conteudo);
+    addToken("STRING");
 }
 
 [0-9]+       { 

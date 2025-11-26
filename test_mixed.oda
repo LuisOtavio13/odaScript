@@ -1,0 +1,4 @@
+var x = 42 end
+print "The value is: " end
+print x end
+print "Done!" end

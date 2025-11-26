@@ -62,11 +62,11 @@ class Yylex {
   private static final int [] ZZ_CMAP_BLOCKS = zzUnpackcmap_blocks();
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
-    "\11\0\2\1\2\0\1\1\22\0\1\1\17\0\12\2"+
-    "\2\0\1\3\1\4\1\5\2\0\32\6\6\0\1\7"+
-    "\2\6\1\10\1\11\1\12\2\6\1\13\2\6\1\14"+
-    "\1\6\1\15\3\6\1\16\1\17\2\6\1\20\4\6"+
-    "\u0185\0";
+    "\11\0\2\1\2\0\1\1\22\0\1\1\1\0\1\2"+
+    "\15\0\12\3\2\0\1\4\1\5\1\6\2\0\32\7"+
+    "\6\0\1\10\2\7\1\11\1\12\1\13\2\7\1\14"+
+    "\2\7\1\15\1\7\1\16\1\7\1\17\1\7\1\20"+
+    "\1\21\1\22\1\7\1\23\4\7\u0185\0";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[512];
@@ -93,11 +93,12 @@ class Yylex {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\3\1\4\1\5\4\6\1\7"+
-    "\1\10\1\11\2\6\1\12\2\6\1\13\1\14\1\15";
+    "\1\0\1\1\1\0\1\2\1\3\1\4\1\5\5\6"+
+    "\1\7\1\10\1\11\1\12\2\6\1\13\3\6\1\14"+
+    "\1\6\1\15\1\16\1\6\1\17";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[21];
+    int [] result = new int[28];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -122,12 +123,13 @@ class Yylex {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\21\0\42\0\63\0\104\0\125\0\146\0\167"+
-    "\0\210\0\231\0\252\0\252\0\252\0\273\0\314\0\146"+
-    "\0\335\0\356\0\146\0\146\0\146";
+    "\0\0\0\24\0\50\0\74\0\120\0\144\0\170\0\214"+
+    "\0\240\0\264\0\310\0\334\0\360\0\360\0\360\0\360"+
+    "\0\u0104\0\u0118\0\214\0\u012c\0\u0140\0\u0154\0\214\0\u0168"+
+    "\0\214\0\214\0\u017c\0\214";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[21];
+    int [] result = new int[28];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -150,16 +152,19 @@ class Yylex {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\0\1\2\1\3\1\4\1\5\1\6\3\7\1\10"+
-    "\1\7\1\11\4\7\1\12\1\0\1\2\21\0\1\3"+
-    "\22\0\1\13\20\0\1\14\20\0\1\15\22\0\13\7"+
-    "\6\0\6\7\1\16\1\17\3\7\6\0\4\7\1\20"+
-    "\6\7\6\0\1\7\1\21\11\7\27\0\11\7\1\22"+
-    "\1\7\6\0\2\7\1\23\10\7\6\0\10\7\1\24"+
-    "\2\7\6\0\3\7\1\25\7\7";
+    "\1\0\1\2\1\3\1\4\1\5\1\6\1\7\3\10"+
+    "\1\11\1\10\1\12\2\10\1\13\3\10\1\14\1\0"+
+    "\1\2\22\0\2\3\1\15\21\3\3\0\1\4\25\0"+
+    "\1\16\23\0\1\17\23\0\1\20\25\0\15\10\7\0"+
+    "\6\10\1\21\1\22\5\10\7\0\4\10\1\23\10\10"+
+    "\7\0\11\10\1\24\3\10\7\0\1\10\1\25\13\10"+
+    "\33\0\12\10\1\26\2\10\7\0\2\10\1\27\12\10"+
+    "\7\0\5\10\1\30\7\10\7\0\11\10\1\31\3\10"+
+    "\7\0\3\10\1\32\11\10\7\0\7\10\1\33\5\10"+
+    "\7\0\13\10\1\34\1\10";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[255];
+    int [] result = new int[400];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -202,10 +207,10 @@ class Yylex {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\11\1\3\11\10\1";
+    "\1\0\1\1\1\0\11\1\4\11\14\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[21];
+    int [] result = new int[28];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -285,27 +290,21 @@ class Yylex {
   private boolean zzEOFDone;
 
   /* user code: */
-    private VetorDinamico vetorTokens = new VetorDinamico();
-    private TabelaDeSimbolos tabelaDeSimbolos = new TabelaDeSimbolos();
+    private VetorDinamico vetor = new VetorDinamico();
+    private TabelaDeSimbolos tb = new TabelaDeSimbolos();
     
-   
     public VetorDinamico getVetor() {
-        return vetorTokens;
+        return vetor;
+    }
+    private void addSb(String tipo, String okay){
+        tb.adicionarSimbolo(tipo, okay);
     }
     
-    
-    public TabelaDeSimbolos obterTabelaDeSimbolos() {
-        return tabelaDeSimbolos;
+    private void addToken(String tipo) {
+        vetor.adicionar(tipo);
     }
-    
-    
-    private void adicionarSimboloTabela(String tipoSimbolo, String lexema) {
-        tabelaDeSimbolos.adicionarSimbolo(tipoSimbolo, lexema);
-    }
-    
-   
-    private void adicionarToken(String tipoToken) {
-        vetorTokens.adicionar(tipoToken);
+    public TabelaDeSimbolos obterTabelaDeSimbolos(){
+        return tb;
     }
 
 
@@ -659,7 +658,7 @@ class Yylex {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
               {
-                adicionarToken("EOF");
+                addToken("EOF");
     return null;
               }
       }
@@ -669,79 +668,92 @@ class Yylex {
             { 
             }
           // fall through
-          case 14: break;
-          case 2:
-            { adicionarSimboloTabela("NUMBER", yytext());
-    adicionarToken("NUMBER");
-            }
-          // fall through
-          case 15: break;
-          case 3:
-            { adicionarSimboloTabela("MENOR_QUE", yytext());
-    adicionarToken("MENOR_QUE");
-            }
-          // fall through
           case 16: break;
-          case 4:
-            { adicionarSimboloTabela("IGUAL", yytext());
-    adicionarToken("IGUAL");
+          case 2:
+            { addSb("NUMBER", yytext());
+    addToken("NUMBER");
             }
           // fall through
           case 17: break;
-          case 5:
-            { adicionarSimboloTabela("MAIOR_QUE", yytext());
-    adicionarToken("MAIOR_QUE");
+          case 3:
+            { addSb("MENOR_QUE", yytext());
+    addToken("MENOR_QUE");
             }
           // fall through
           case 18: break;
-          case 6:
-            { adicionarSimboloTabela("IDENTIFIER", yytext());
-    adicionarToken("IDENTIFIER");
+          case 4:
+            { addSb("IGUAL", yytext());
+    addToken("IGUAL");
             }
           // fall through
           case 19: break;
-          case 7:
-            { adicionarSimboloTabela("MENOR_OU_IGUAL_QUE", yytext());
-    adicionarToken("MENOR_OU_IGUAL_QUE");
+          case 5:
+            { addSb("MAIOR_QUE", yytext());
+    addToken("MAIOR_QUE");
             }
           // fall through
           case 20: break;
-          case 8:
-            { adicionarSimboloTabela("IGUAL_QUE", yytext());
-    adicionarToken("IGUAL_QUE");
+          case 6:
+            { addSb("IDENTIFIER", yytext());
+    addToken("IDENTIFIER");
             }
           // fall through
           case 21: break;
-          case 9:
-            { adicionarSimboloTabela("MAIOR_OU_IGUAL_QUE", yytext());
-    adicionarToken("MAIOR_OU_IGUAL_QUE");
+          case 7:
+            { String conteudo = yytext().substring(1, yytext().length() - 1);
+    addSb("STRING", conteudo);
+    addToken("STRING");
             }
           // fall through
           case 22: break;
-          case 10:
-            { adicionarSimboloTabela("IF", yytext());
-    adicionarToken("IF");
+          case 8:
+            { addSb("MENOR_OU_IGUAL_QUE", yytext());
+    addToken("MENOR_OU_IGUAL_QUE");
             }
           // fall through
           case 23: break;
-          case 11:
-            { adicionarSimboloTabela("END", yytext());
-    adicionarToken("END");
+          case 9:
+            { addSb("IGUAL_QUE", yytext());
+    addToken("IGUAL_QUE");
             }
           // fall through
           case 24: break;
-          case 12:
-            { adicionarSimboloTabela("VAR", yytext());
-    adicionarToken("VAR");
+          case 10:
+            { addSb("MAIOR_OU_IGUAL_QUE", yytext());
+    addToken("MAIOR_OU_IGUAL_QUE");
             }
           // fall through
           case 25: break;
-          case 13:
-            { adicionarSimboloTabela("ELSE", yytext());
-    adicionarToken("ELSE");
+          case 11:
+            { addSb("IF", yytext());
+    addToken("IF");
             }
           // fall through
           case 26: break;
+          case 12:
+            { addSb("END", yytext());
+    addToken("END");
+            }
+          // fall through
+          case 27: break;
+          case 13:
+            { addSb("VAR", yytext());
+    addToken("VAR");
+            }
+          // fall through
+          case 28: break;
+          case 14:
+            { addSb("ELSE", yytext());
+    addToken("ELSE");
+            }
+          // fall through
+          case 29: break;
+          case 15:
+            { addSb("PRINT", yytext());
+    addToken("PRINT");
+            }
+          // fall through
+          case 30: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

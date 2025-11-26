@@ -4,6 +4,8 @@ package src.analizadorSemantico;
 import src.analizeSintatico.ConstantesTokens;
 import src.ast.AstPattter;
 import src.ast.Var;
+import src.ast.PrintCmd;
+import src.ast.StringCmd;
 import src.ast.IfExpression;
 import src.simbolos.TabelaDeSimbolos;
 import utils.VetorDInamicoDeAST;
@@ -68,6 +70,25 @@ public class MainAnalizadorSemantico {
                 VariavelAnalizadorSemantico.verificarDeclaracao(variaveisDeclaradas, nome);
 
                 return null; 
+            }
+
+            case ConstantesTokens.PRINT: {
+                // Próximo token pode ser identificador (variável) ou STRING (string literal)
+                if (indiceAtual + 1 < vetorTokens.obterTamanho()) {
+                    String proximoTokenType = vetorTokens.obterElemento(indiceAtual + 1);
+                    
+                    if (proximoTokenType.equals(ConstantesTokens.STRING)) {
+                        // Print de string literal
+                        String conteudo = tabelaDeSimbolos.obterLexema(indiceAtual + 1);
+                        return new StringCmd(conteudo);
+                    } else if (proximoTokenType.equals(ConstantesTokens.IDENTIFIER)) {
+                        // Print de variável
+                        String nomeVariavel = tabelaDeSimbolos.obterLexema(indiceAtual + 1);
+                        VariavelAnalizadorSemantico.verificarDeclaracao(variaveisDeclaradas, nomeVariavel);
+                        return new PrintCmd(nomeVariavel);
+                    }
+                }
+                return null;
             }
 
             case ConstantesTokens.EOF:

@@ -1,6 +1,8 @@
 package src.patter;
 
 import src.ast.Var;
+import src.ast.PrintCmd;
+import src.ast.StringCmd;
 
 public class VisitedImpl implements Visitd {
 
@@ -21,6 +23,22 @@ public class VisitedImpl implements Visitd {
         String registro = generateLLVMVar(var);
         llvmCode.append(registro);
         return registro;
+    }
+
+    @Override
+    public String Print(PrintCmd printCmd) {
+        String nomeVar = printCmd.getNomeVariavel();
+        String codigo = String.format("  ; print %s\n", nomeVar);
+        llvmCode.append(codigo);
+        return codigo;
+    }
+
+    @Override
+    public String String(StringCmd stringCmd) {
+        String conteudo = stringCmd.getConteudo();
+        String codigo = String.format("  ; print string \"%s\"\n", conteudo);
+        llvmCode.append(codigo);
+        return codigo;
     }
 
     private String generateLLVMVar(Var var) {

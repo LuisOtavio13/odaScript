@@ -8,6 +8,7 @@ public class ConstantesTokens {
     public static final String IF = "IF";
     public static final String ELSE = "ELSE";
     public static final String END = "END";
+    public static final String PRINT = "PRINT";
     
    
     public static final String NUMBER = "NUMBER";

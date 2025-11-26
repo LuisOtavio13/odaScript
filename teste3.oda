@@ -1,2 +1,4 @@
 var x = 42 end
 var valor = 100 end
+print x end
+print valor end

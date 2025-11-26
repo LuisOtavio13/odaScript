@@ -8,6 +8,8 @@ import src.simbolos.TabelaDeSimbolos;
 import src.patter.LLVMGenerator;
 import src.ast.AstPattter;
 import src.ast.Var;
+import src.ast.PrintCmd;
+import src.ast.StringCmd;
 import utils.VetorDInamicoDeAST;
 import utils.VetorDinamico;
 
@@ -22,10 +24,11 @@ public class Main {
 
     public static void main(String[] args) {
         VetorDInamicoDeAST vetorDInamicoDeAST = new VetorDInamicoDeAST();
+        String nomeArquivo = (args.length > 0) ? args[0] : ARQUIVO_ENTRADA;
         try {
-            validarArquivoEntrada(ARQUIVO_ENTRADA);
+            validarArquivoEntrada(nomeArquivo);
 
-            Object[] resultadosLexicos = executarAnaliseLexicaCompleta(ARQUIVO_ENTRADA);
+            Object[] resultadosLexicos = executarAnaliseLexicaCompleta(nomeArquivo);
             VetorDinamico tokenVector = (VetorDinamico) resultadosLexicos[0];
             TabelaDeSimbolos symbolTable = (TabelaDeSimbolos) resultadosLexicos[1];
 
@@ -100,6 +103,12 @@ public class Main {
             AstPattter elemento = ast.obterElemento(i);
             if (elemento instanceof Var) {
                 gerador.declararVariavel((Var) elemento);
+            } else if (elemento instanceof PrintCmd) {
+                PrintCmd printCmd = (PrintCmd) elemento;
+                gerador.imprimirVariavel(printCmd.getNomeVariavel());
+            } else if (elemento instanceof StringCmd) {
+                StringCmd stringCmd = (StringCmd) elemento;
+                gerador.imprimirString(stringCmd.getConteudo());
             }
         }
 

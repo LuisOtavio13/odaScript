@@ -5,6 +5,7 @@ src/otimizer/Variable.class
 src/analizeSintatico/Luis.class
 src/ast/Var.class
 src/config/ConfigDebug.class
+src/ast/StringCmd.class
 src/patter/VisitedImpl.class
 src/patter/LLVMGenerator.class
 src/analizadorSemantico/Retorno.class
@@ -13,8 +14,10 @@ src/ast/AstPattter.class
 src/patter/Visitd.class
 Yylex.class
 src/analizeSintatico/GerenciadorErros.class
+src/ast/PrintCmd.class
 src/simbolos/TabelaDeSimbolos.class
 src/analizadorSemantico/MainAnalizadorSemantico.class
+src/analizeSintatico/Print.class
 src/analizadorSemantico/VariavelAnalizadorSemantico.class
 src/analizeSintatico/Atribuicao.class
 utils/Colecao.class
