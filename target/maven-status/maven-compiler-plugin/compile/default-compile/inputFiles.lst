@@ -2,6 +2,7 @@
 /home/luis/IdeaProjects/odaScript/src/analizeSintatico/Atribuicao.java
 /home/luis/IdeaProjects/odaScript/utils/Colecao.java
 /home/luis/IdeaProjects/odaScript/src/otimizer/Variable.java
+/home/luis/IdeaProjects/odaScript/src/ast/IfExpression.java
 /home/luis/IdeaProjects/odaScript/src/analizeSintatico/ConstantesTokens.java
 /home/luis/IdeaProjects/odaScript/utils/Regex.java
 /home/luis/IdeaProjects/odaScript/src/analizeSintatico/GerenciadorErros.java

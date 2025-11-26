@@ -4,6 +4,7 @@ package src.analizadorSemantico;
 import src.analizeSintatico.ConstantesTokens;
 import src.ast.AstPattter;
 import src.ast.Var;
+import src.ast.IfExpression;
 import src.simbolos.TabelaDeSimbolos;
 import utils.VetorDInamicoDeAST;
 import utils.VetorDinamico;
@@ -50,6 +51,10 @@ public class MainAnalizadorSemantico {
                     Object valorExtraido = extrairValorDaDeclaracao(tabelaDeSimbolos, vetorTokens, indiceAtual);
                     if (valorExtraido != null) {
                         varNode.setValor(valorExtraido);
+                        // if value is an IfExpression, set variable type to NUMBER by inference
+                        if (valorExtraido instanceof IfExpression) {
+                            varNode.setTipo(src.ast.TipoInferencia.NUMBER);
+                        }
                     }
                 }
                 
@@ -99,9 +104,59 @@ public class MainAnalizadorSemantico {
                     } else if (ConstantesTokens.IDENTIFIER.equals(tipoValor)) {
                         return lexemaValor;
                     } else if (ConstantesTokens.IF.equals(tipoValor)) {
-                        // Valor é uma expressão IF; retorna um placeholder ou o tipo inferido
-                        // Por enquanto, retorna um valor que implica em NUMBER
-                        return 0;
+                        // Valor é uma expressão IF — extrai partes: IF <left> <op> <right> <then> ELSE <else> END
+                        int idx = indiceVAR + 3; // aponta para IF
+                        // left
+                        Object left = null;
+                        if (idx + 1 < vetorTokens.obterTamanho()) {
+                            String leftType = vetorTokens.obterElemento(idx + 1);
+                            String leftLex = tabelaDeSimbolos.obterLexema(idx + 1);
+                            if (ConstantesTokens.NUMBER.equals(leftType)) {
+                                try { left = Integer.parseInt(leftLex); } catch (NumberFormatException ex) { left = leftLex; }
+                            } else {
+                                left = leftLex;
+                            }
+                        }
+                        // operator
+                        String operator = tabelaDeSimbolos.obterLexema(idx + 2);
+                        // right
+                        Object right = null;
+                        if (idx + 3 < vetorTokens.obterTamanho()) {
+                            String rightType = vetorTokens.obterElemento(idx + 3);
+                            String rightLex = tabelaDeSimbolos.obterLexema(idx + 3);
+                            if (ConstantesTokens.NUMBER.equals(rightType)) {
+                                try { right = Integer.parseInt(rightLex); } catch (NumberFormatException ex) { right = rightLex; }
+                            } else {
+                                right = rightLex;
+                            }
+                        }
+                        // then value (next)
+                        Object thenVal = null;
+                        if (idx + 4 < vetorTokens.obterTamanho()) {
+                            String thenType = vetorTokens.obterElemento(idx + 4);
+                            String thenLex = tabelaDeSimbolos.obterLexema(idx + 4);
+                            if (ConstantesTokens.NUMBER.equals(thenType)) {
+                                try { thenVal = Integer.parseInt(thenLex); } catch (NumberFormatException ex) { thenVal = thenLex; }
+                            } else {
+                                thenVal = thenLex;
+                            }
+                        }
+                        // else value (after ELSE)
+                        Object elseVal = null;
+                        int elseTokenPos = idx + 5; // expected ELSE at +5
+                        if (elseTokenPos < vetorTokens.obterTamanho() && ConstantesTokens.ELSE.equals(vetorTokens.obterElemento(idx + 5))) {
+                            if (idx + 6 < vetorTokens.obterTamanho()) {
+                                String elseType = vetorTokens.obterElemento(idx + 6);
+                                String elseLex = tabelaDeSimbolos.obterLexema(idx + 6);
+                                if (ConstantesTokens.NUMBER.equals(elseType)) {
+                                    try { elseVal = Integer.parseInt(elseLex); } catch (NumberFormatException ex) { elseVal = elseLex; }
+                                } else {
+                                    elseVal = elseLex;
+                                }
+                            }
+                        }
+
+                        return new IfExpression(left, operator, right, thenVal, elseVal);
                     }
                 }
             }

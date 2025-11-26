@@ -24,6 +24,7 @@ src/analizeSintatico/Config.class
 src/analizeSintatico/ValidadorToken.class
 src/ast/GenerateAST.class
 src/analizeSintatico/ConstantesTokens.class
+src/ast/IfExpression.class
 src/analizeSintatico/ContextoAnalise.class
 src/analizeSintatico/Var.class
 src/analizeSintatico/OKAY.class
