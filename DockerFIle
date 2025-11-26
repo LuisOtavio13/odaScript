@@ -1,0 +1,23 @@
+FROM ubuntu:22.04
+#docker build -t llvm-env .
+#docker run -it --rm -v $(pwd):/workspace llvm-env
+#llvm-as program.ll -o program.bc
+#llc -filetype=obj program.bc -o program.o
+#clang -no-pie program.o -o program
+#./program
+
+
+# Instalar dependências básicas
+RUN apt-get update && apt-get install -y \
+    clang \
+    llvm \
+    && rm -rf /var/lib/apt/lists/*
+
+# Definir diretório de trabalho
+WORKDIR /workspace
+
+# Copiar seu código para dentro do container
+COPY . /workspace
+
+# Comando padrão (pode ser alterado)
+CMD ["/bin/bash"]
